@@ -1,17 +1,42 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
-        // Press Alt+Entrée with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
 
-        // Press Maj+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.println("Bienvenue dans le jeu Citadelles!");
 
-            // Press Maj+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        // Initialisation du plateau
+        Plateau plateau = new Plateau();
+
+        // Initialisation des joueurs
+        System.out.print("Combien de joueurs participent? ");
+        int nbJoueurs = scanner.nextInt();
+        for (int i = 0; i < nbJoueurs; i++) {
+            Joueur joueur = new Joueur();
+            System.out.println("Joueur " + (i + 1) + " a été créé.");
+            // Vous pouvez ajouter des étapes supplémentaires pour configurer chaque joueur ici
         }
+
+        // Chargement des cartes
+        Pioche pioche = new Pioche();
+
+        // Initialisation des personnages et du roi
+        Roi roi = new Roi();
+        Personnage[] personnages = {
+                // Initialiser les personnages spécifiques ici
+        };
+
+        // Boucle de jeu principale
+        boolean jeuEnCours = true;
+        while (jeuEnCours) {
+            // Logique de jeu ici
+
+            // Pour le moment, nous terminons simplement le jeu
+            jeuEnCours = false;
+        }
+
+        System.out.println("Merci d'avoir joué!");
     }
 }

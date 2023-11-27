@@ -7,6 +7,7 @@ public class Personnage {
     private Joueur joueur;
     private boolean vole;
     private boolean assassine;
+    private PlateauDeJeu plateau;
 
     // Constructeur
     public Personnage(String nom, int rang, String[] caracteristiques) {
@@ -83,6 +84,9 @@ public class Personnage {
         this.vole = false;
         this.assassine = false;
         // Vous pouvez ajouter d'autres réinitialisations si nécessaire.
+    }
+    public void setPlateau(PlateauDeJeu plateau) {
+        this.plateau = plateau;
     }
 
 }

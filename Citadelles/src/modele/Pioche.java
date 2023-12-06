@@ -13,7 +13,8 @@ public class Pioche {
 		Quartier pioche = null;
 		if (liste.isEmpty()) {
 			return pioche;
-		} else {
+		} 
+        else{
 			pioche = liste.get(liste.size()-1);
 			liste.remove(liste.size()-1);
 		}
@@ -27,15 +28,12 @@ public class Pioche {
 	}
 	public void melanger() {
 		generateur = new Random();
-		for (int compteur = 0; compteur<nombreElements();compteur++) {
+		for (int compteur = 0; compteur<nombreElements(); compteur++) {
 			int i = generateur.nextInt(nombreElements());
 			int j = generateur.nextInt(nombreElements());
 			Quartier quartier = liste.get(i);
 			liste.set(i, liste.get(j));
 			liste.set(j, quartier);
 		}
-		
-		
 	}
-	
 }

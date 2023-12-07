@@ -1,32 +1,34 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Random;
 
 public class Pioche {
-	private ArrayList<Quartier> liste;
+	private ArrayList < Quartier > liste;
 
-	public Pioche() {
-		liste = new ArrayList<>();
+	public Pioche() { //Constructeur
+		this.liste = new ArrayList < Quartier > ();
 	}
 
-	public Quartier piocher() {
-		if (liste.isEmpty()) {
-			return null;
-		} else {
-			return liste.remove(liste.size() - 1);
-		}
+	public Quartier piocher() { //Piocher la carte au sommet de la pioche
+		return this.liste.size() > 0 ? this.liste.remove(0) : null;
 	}
 
-	public void ajouter(Quartier nouveau) {
-		liste.add(nouveau); // Ajoute à la fin de la liste pour être pioché en dernier
+	public void ajouter(Quartier quartier) { //Ajouter un quartier en bas de la pioche
+		this.liste.add(quartier);
 	}
 
-	public int nombreElements() {
-		return liste.size();
+	public int nombreElements() { //Retourne le nombre de carte dans la pioche
+		return this.liste.size();
 	}
 
-	public void melanger() {
-		Collections.shuffle(liste); // Utilise la méthode shuffle de Collections pour mélanger
+	public void melanger() { //Mélanger la pioche
+		Random generateur = new Random();
+		int i = generateur.nextInt(this.nombreElements());
+		int j = generateur.nextInt(this.nombreElements());
+		Quartier tempQuartier;
+		tempQuartier = liste.get(i);
+		liste.set(i, liste.get(j));
+		liste.set(j, tempQuartier);
 	}
 }

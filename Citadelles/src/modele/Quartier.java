@@ -5,60 +5,73 @@ public class Quartier {
     private String type;
     private int coutConstruction;
     private String caracteristiques;
+    public static final String[] TYPE_QUARTIERS = {
+            "RELIGIEUX",
+            "MILITAIRE",
+            "NOBLE",
+            "COMMERCANT",
+            "MERVEILLE"
+    };
 
-    // Constante pour les types de quartiers
-    public static final String[] TYPE_QUARTIERS = {"Religieux", "Noble", "Commerce", "Militaire"};
+    public Quartier() { //Constructeur
+        super();
+        this.nom = "";
+        this.type = "";
+        this.coutConstruction = 0;
+        this.caracteristiques = "";
+    }
 
-    // Constructeur
-    public Quartier(String nom, String type, int coutConstruction, String caracteristiques) {
+    public Quartier(String nom, String type, int coutConstruction, String caracteristiques) { //Constructeur
+        super();
         this.nom = nom;
-        setType(type); // Vérification du type
-        setCoutConstruction(coutConstruction); // Vérification du coût de construction
+        this.type = type;
+        this.coutConstruction = coutConstruction;
         this.caracteristiques = caracteristiques;
     }
-
-    // Accesseurs pour le nom
-    public String getNom() {
-        return nom;
+    public Quartier(String nom, String type, int coutConstruction) { //Constructeur
+        super();
+        this.nom = nom;
+        this.type = type;
+        this.coutConstruction = coutConstruction;
+        this.caracteristiques = "";
     }
 
-    public void setNom(String nom) {
+    public String getNom() { //Retourne le nom du quartier
+        return this.nom;
+    }
+    public void setNom(String nom) { //Défini le nom du quartier
         this.nom = nom;
     }
 
-    // Accesseurs pour le type
-    public String getType() {
-        return type;
+    public String getType() { //Retourne le type du quartier
+        return this.type;
     }
-
-    public void setType(String type) {
-        for (String typeValide : TYPE_QUARTIERS) {
-            if (typeValide.equals(type)) {
+    public void setType(String type) { //Défini le type du quartier
+        for (String typeQt: Quartier.TYPE_QUARTIERS) {
+            if (typeQt == type) {
                 this.type = type;
-                return;
+                break;
+            } else {
+                this.type = "";
             }
         }
-        throw new IllegalArgumentException("Type invalide. Les types valides sont : " + String.join(", ", TYPE_QUARTIERS));
     }
 
-    // Accesseurs pour le coût de construction
-    public int getCoutConstruction() {
-        return coutConstruction;
+    public int getCout() { //Retourne le coût du quartier
+        return this.coutConstruction;
     }
-
-    public void setCoutConstruction(int coutConstruction) {
-        if (coutConstruction < 1 || coutConstruction > 6) {
-            throw new IllegalArgumentException("Le coût de construction doit être entre 1 et 6.");
+    public void setCout(int coutConstruction) { //Défini le coût d'un quartier
+        if (1 <= coutConstruction && coutConstruction <= 6) {
+            this.coutConstruction = coutConstruction;
+        } else {
+            coutConstruction = 0;
         }
-        this.coutConstruction = coutConstruction;
     }
 
-    // Accesseurs pour les caractéristiques
-    public String getCaracteristiques() {
+    public String getCaracteristiques() { //Retourne les caractéristiques du quartier
         return caracteristiques;
     }
-
-    public void setCaracteristiques(String caracteristiques) {
+    public void setCaracteristiques(String caracteristiques) { //Défini les caractéristiques du quartier
         this.caracteristiques = caracteristiques;
     }
 }

@@ -1,92 +1,103 @@
 package modele;
 
-public class Personnage {
-    private String nom;
-    private int rang;
-    private String[] caracteristiques;
-    private Joueur joueur;
-    private boolean vole;
-    private boolean assassine;
-    private PlateauDeJeu plateau;
+public abstract class Personnage {
+    protected String nom;
+    protected int rang;
+    protected String caracteristiques;
+    protected Joueur joueur;
+    protected boolean assassine;
+    protected boolean vole;
+    protected PlateauDeJeu plateau;
 
-    // Constructeur
-    public Personnage(String nom, int rang, String[] caracteristiques) {
+    public Personnage(String nom, int rang, String caracteristiques) { //Constructeur
         this.nom = nom;
         this.rang = rang;
         this.caracteristiques = caracteristiques;
-        this.joueur = null;
-        this.vole = false;
-        this.assassine = false;
+        joueur = null;
+        assassine = false;
+        vole = false;
     }
 
-    // Accesseurs en lecture
-    public String getNom() {
-        return nom;
+    public String getNom() { //Retourne le nom du personnage
+        return this.nom;
     }
 
-    public int getRang() {
-        return rang;
+    public int getRang() { //retourne le rang du personnage
+        return this.rang;
     }
 
-    public String[] getCaracteristiques() {
-        return caracteristiques;
+    public String getCaracteristiques() { //Retourne les caractéristiques du personnage
+        return this.caracteristiques;
     }
 
-    public Joueur getJoueur() {
-        return joueur;
+    public Joueur getJoueur() { //Retourne le joueur associé au personnage
+        return this.joueur;
     }
 
-    public boolean isVole() {
-        return vole;
+    public boolean getAssassine() { //Retourne si le personnage est assassiné
+        return this.assassine;
     }
 
-    public boolean isAssassine() {
-        return assassine;
+    public boolean getVole() { //Retourne si le personnage est volé
+        return this.vole;
     }
 
-    // Accesseurs en écriture
-    public void setJoueur(Joueur joueur) {
-        this.joueur = joueur;
+    public PlateauDeJeu getPlateau() { //Retourne le plateau de Jeu
+        return this.plateau;
     }
 
-    public void setVole(boolean vole) {
-        this.vole = vole;
-    }
-
-    public void setAssassine(boolean assassine) {
-        this.assassine = assassine;
-    }
-
-    // Méthodes spécifiques demandées par les tests
-    public void ajouterPieces(int nombreDePieces) {
-        if (!vole && !assassine && joueur != null) {
-            joueur.ajouterPieces(nombreDePieces);
-        }
-    }
-
-    // Supposons que vous ayez besoin de méthodes pour gérer les quartiers.
-    // Vous devez définir ce que ces méthodes doivent faire et les implémenter ici.
-    // Par exemple, vous pourriez avoir une méthode pour ajouter un quartier à la cité du joueur.
-    public void ajouterQuartierDansCite(Quartier quartier) {
-        if (joueur != null) {
-            joueur.ajouterQuartierDansCite(quartier);
-        }
-    }
-
-    // Méthode pour utiliser le pouvoir du personnage
-    // L'implémentation dépendra des règles spécifiques du jeu.
-    public void utiliserPouvoir() {
-        // Logique pour utiliser le pouvoir
-    }
-
-    // Méthode pour réinitialiser les attributs du personnage pour un nouveau tour
-    public void reinitialiser() {
-        this.vole = false;
-        this.assassine = false;
-        // Vous pouvez ajouter d'autres réinitialisations si nécessaire.
-    }
-    public void setPlateau(PlateauDeJeu plateau) {
+    public void setPlateau(PlateauDeJeu plateau) { //Défini le plateau de jeu
         this.plateau = plateau;
     }
 
+    public void setJoueur(Joueur j) { //Défini le joueur associé au personnage
+        this.joueur = j;
+        this.joueur.monPersonnage = this;
+    }
+
+    public void setVole() { //Défini que le personnage est volé
+        this.vole = true;
+    }
+
+    public void setAssassine() { //Défini que le personnage est assassiné
+        this.assassine = true;
+    }
+
+    public void ajouterPieces() { //Ajouter 2 pièces au joueur auquel le personnage est associé
+        if (joueur != null && assassine == false) {
+            joueur.ajouterPieces(2);
+        }
+    }
+
+    public void ajouterQuartier(Quartier nouveau) { //Ajouter un quartier dans la main du joueur associé au personnage
+        if (joueur != null && assassine == false) {
+            joueur.ajouterQuartierDansMain(nouveau);
+        }
+    }
+
+    public void construire(Quartier nouveau) { //Construire un quartier dans la cité du joueur associé au personnage
+        if (joueur != null && assassine == false) {
+            joueur.ajouterQuartierDansCite(nouveau);
+        }
+    }
+
+    public void percevoirRessourcesSpecifiques() { //Perception des ressources spécifiques du personnage
+        if (joueur != null && assassine == false) {
+            System.out.println("aucune ressource spécifique ");
+        }
+    }
+
+    public abstract void utiliserPouvoir(); //Utiliser le pouvoir spécifique d'un personnage
+
+    public void reinitialiser() { //Réinitialiser les données du personnage
+        if (this.joueur != null) {
+            this.joueur.monPersonnage = null;
+        }
+        this.joueur = null;
+        this.vole = false;
+        this.assassine = false;
+
+    }
+
+    public abstract void utiliserPouvoirAvatar(); //Utilisation du pouvoir spécifique d'un personnage aléatoirement
 }

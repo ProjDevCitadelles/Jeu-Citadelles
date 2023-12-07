@@ -1,61 +1,65 @@
 package modele;
 
-import java.util.ArrayList;
-
 public class PlateauDeJeu {
-    private Personnage[] listePersonnages = new Personnage[9]; // Comme il y a 8 ou 9 personnages
-    private Joueur[] listeJoueurs = new Joueur[9]; // Pour un maximum de 9 joueurs
-    //private Pioche pioche = new Pioche(); // Supposons que vous avez une classe Pioche
+    protected Personnage[] listePersonnages;
+    private Joueur[] listeJoueurs;
+    private Pioche pioche;
     private int nombrePersonnages;
     private int nombreJoueurs;
 
-    // Constructeur sans paramètre
-    public PlateauDeJeu() {
-        // Initialisation des attributs si nécessaire
-        nombrePersonnages = 0;
-        nombreJoueurs = 0;
+    public PlateauDeJeu() { //Constructeur
+        this.listePersonnages = new Personnage[9];
+        this.listeJoueurs = new Joueur[9];
+        this.nombreJoueurs = 0;
+        this.nombrePersonnages = 0;
+        this.pioche = new Pioche();
     }
 
-    // Accesseurs en lecture
-    public int getNombrePersonnages() {
-        return nombrePersonnages;
+    public int getNombrePersonnages() { //Retourne le nombre de personnages sur le plateau
+        return this.nombrePersonnages;
     }
 
-    public int getNombreJoueurs() {
-        return nombreJoueurs;
+    public int getNombreJoueurs() { //Retourne le nombre de joueurs sur le plateau
+        return this.nombreJoueurs;
     }
 
-   // public Pioche getPioche() {
-    //    return pioche;
-   // }
+    public Pioche getPioche() { //Retourne la pioche
+        return this.pioche;
+    }
 
-    public Personnage getPersonnage(int i) {
-        if (i >= 0 && i < nombrePersonnages) {
+    public void setPioche(Pioche pioche){
+        this.pioche = pioche;
+    }
+
+    public Personnage getPersonnage(int i) { //Retourne un personnage parmis la liste des personnages
+        if (0 <= i && i <= 8) {
             return listePersonnages[i];
+        } else {
+            return null;
         }
-        return null;
     }
 
-    public Joueur getJoueur(int i) {
-        if (i >= 0 && i < nombreJoueurs) {
+    public Joueur getJoueur(int i) { //Retourne un personnage parmis la liste des joueurs
+        if (0 <= i && i <= 8) {
             return listeJoueurs[i];
-        }
-        return null;
-    }
-
-    // Méthodes pour ajouter des éléments au plateau
-    public void ajouterPersonnage(Personnage nouveau) {
-        if (nouveau != null && nombrePersonnages < listePersonnages.length) {
-            listePersonnages[nombrePersonnages++] = nouveau;
-            nouveau.setPlateau(this); // Associe le plateau au personnage
+        } else {
+            return null;
         }
     }
 
-    public void ajouterJoueur(Joueur nouveau) {
-        if (nouveau != null && nombreJoueurs < listeJoueurs.length) {
-            listeJoueurs[nombreJoueurs++] = nouveau;
+    public void ajouterPersonnage(Personnage personnage) { //Ajouter un nouveau personnage dans le plateau de jeu
+        if (personnage != null && this.getNombrePersonnages() != this.listePersonnages.length) {
+            this.listePersonnages[this.getNombrePersonnages()] = personnage;
+            personnage.setPlateau(this);
+            this.nombrePersonnages += 1;
         }
     }
 
-    // Vous pouvez ajouter ici d'autres méthodes nécessaires pour la logique de votre jeu
+    public void ajouterJoueur(Joueur joueur) { //Ajouter un nouveau joueur dans le plateau de jeu
+        if (joueur != null && this.getNombreJoueurs() != this.listeJoueurs.length) {
+            this.listeJoueurs[this.getNombreJoueurs()] = joueur;
+            this.nombreJoueurs += 1;
+        }
+    }
+
 }

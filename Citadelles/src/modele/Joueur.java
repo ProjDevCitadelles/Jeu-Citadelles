@@ -1,139 +1,161 @@
 package modele;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Joueur {
     private String nom;
-    private int pieces;
-    private ArrayList<Quartier> main;
-    private Quartier[] cite;
+    private int tresor;
+    private int nbQuartiers;
     private boolean possedeCouronne;
-    private Personnage personnage;
+    protected Quartier[] cite;
+    private ArrayList < Quartier > main;
+    protected Personnage monPersonnage = null;
+    private boolean simule;
+    private boolean premier;
+    private boolean rangPlusEleve;
 
-    // Constructeur
-    public Joueur(String nom) {
+    public Joueur(String nom) { //Constructeur
         this.nom = nom;
-        this.pieces = 0;
-        this.main = new ArrayList<>();
-        this.cite = new Quartier[8]; // Tableau initialisé avec une taille maximale de 8
+        this.tresor = 0;
+        this.nbQuartiers = 0;
         this.possedeCouronne = false;
+        this.cite = new Quartier[8];
+        this.main = new ArrayList < Quartier > ();
+        this.simule = false;
+        this.premier = false;
+        this.rangPlusEleve = false;
     }
 
-    // Accesseurs en lecture
-    public String getNom() {
-        return nom;
+    public Personnage getPersonnage() { //Retourne le personnage choisi par le joueur
+        return this.monPersonnage;
     }
 
-    public int getNbPieces() {
-        return pieces;
+    public String getNom() { //Retourne le nom du joueur
+        return this.nom;
     }
 
-    public int getNbQuartiersDansCite() {
-        int count = 0;
-        for (Quartier quartier : cite) {
-            if (quartier != null) {
-                count++;
+    public int nbPieces() { //Retourne le trésor du joueur
+        return this.tresor;
+    }
+
+    public int nbQuartiersDansCite() { //Retourne le nombre de quartiers dans la cité du joueur
+        return this.nbQuartiers;
+    }
+
+    public Quartier[] getCite() { //Retourne la cité du joueur
+        return this.cite;
+    }
+
+    public ArrayList < Quartier > getMain() { //Retourne la main du joueur
+        return this.main;
+    }
+
+    public boolean isRangPlusEleve() {
+        return rangPlusEleve;
+    }
+
+    public void setRangPlusEleve() {
+        this.rangPlusEleve = true;
+    }
+
+    public boolean isSimule() {
+        return simule;
+    }
+
+    public void setSimule(boolean simule) {
+        this.simule = simule;
+    }
+
+    public boolean isPremier() {
+        return premier;
+    }
+
+    public void setPremier(boolean premier) {
+        this.premier = premier;
+    }
+
+    public int nbQuartiersDansMain() { //Retourne du nombre de quartiers dans la main du joueur
+        return this.main.size();
+    }
+
+    public boolean getPossedeCouronne() { //Retourne si le joueur posséde la couronne
+        return this.possedeCouronne;
+    }
+
+    public void setPossedeCouronne(boolean b) { //Défini si le joueur posséde la couronne
+        this.possedeCouronne = b;
+    }
+
+    public void ajouterPieces(int piece) { //Ajouter des pièces au trésor du joueur
+        if (piece > 0) {
+            tresor = tresor + piece;
+        } else {
+            System.out.println("Le nombre de pieces ne peut pas etre negatif");
+        }
+    }
+
+    public void retirerPieces(int piece) { //Retirer des pièces au trésor du joueur
+        if (piece <= tresor) {
+            if (piece > 0) {
+                tresor = tresor - piece;
+            } else {
+                System.out.println("Le nombre de pieces ne peut pas etre negatif");
             }
-        }
-        return count;
-    }
-
-    public Quartier[] getCite() {
-        return cite;
-    }
-
-    public ArrayList<Quartier> getMain() {
-        return main;
-    }
-
-    public boolean getPossedeCouronne() {
-        return possedeCouronne;
-    }
-
-    // Accesseur en écriture
-    public void setPossedeCouronne(boolean possedeCouronne) {
-        this.possedeCouronne = possedeCouronne;
-    }
-
-    // Méthodes pour gérer les pièces
-    public void ajouterPieces(int nbPieces) {
-        if (nbPieces > 0) {
-            this.pieces += nbPieces;
+        } else {
+            System.out.println("Vous ne pouvez pas retirer plus de pièces que le trésor");
         }
     }
 
-    public void retirerPieces(int nbPieces) {
-        if (nbPieces > 0 && this.pieces >= nbPieces) {
-            this.pieces -= nbPieces;
+    public void ajouterQuartierDansCite(Quartier quartier) { //Ajouter un quartier dans la cité du joueur
+        if (nbQuartiers < 8) {
+            cite[nbQuartiers] = quartier;
+            nbQuartiers++;
         }
     }
 
-    // Méthodes pour gérer les quartiers
-    public void ajouterQuartierDansCite(Quartier quartier) {
-        for (int i = 0; i < cite.length; i++) {
-            if (cite[i] == null) {
-                cite[i] = quartier;
-                return;
-            }
-        }
-    }
-
-    public boolean quartierPresentDansCite(String nomQuartier) {
-        for (Quartier quartier : cite) {
-            if (quartier != null && quartier.getNom().equals(nomQuartier)) {
+    public boolean quartierPresentDansCite(String quartier) { //Retourne si un quartier est présent dans la cité du joueur
+        for (int i = 0; i < nbQuartiers; i++) {
+            if (cite[i] != null && cite[i].getNom().equals(quartier)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Quartier retirerQuartierDansCite(String nomQuartier) {
-        for (int i = 0; i < cite.length; i++) {
-            if (cite[i] != null && cite[i].getNom().equals(nomQuartier)) {
-                Quartier quartierRetire = cite[i];
-                cite[i] = null;
-                return quartierRetire;
+    public Quartier retirerQuartierDansCite(String quartier) { //Retirer un quartier de la cité du joueur
+        Quartier quartSupprime = null;
+        for (int i = 1; i < this.cite.length; i++) {
+            if (this.cite[i - 1] != null && this.cite[i - 1].getNom().equals(quartier)) {
+                quartSupprime = this.cite[i - 1];
+                this.cite[i - 1] = null;
+            }
+            if (this.cite[i - 1] == null) {
+                this.cite[i - 1] = this.cite[i];
+                this.cite[i] = null;
             }
         }
-        return null;
+        this.nbQuartiers--;
+        return quartSupprime;
     }
 
-    public void ajouterQuartierDansMain(Quartier quartier) {
+    public void ajouterQuartierDansMain(Quartier quartier) { //Ajouter un quartier dans la main du joueur
         main.add(quartier);
     }
 
-    public Quartier retirerQuartierDansMain() {
-        if (!main.isEmpty()) {
-            Random random = new Random();
-            return main.remove(random.nextInt(main.size()));
-        }
-        return null;
+    public Quartier retirerQuartierDansMain() { //Retirer un quartier de la main du joueur
+        Random generateur = new Random();
+        int numeroHasard = generateur.nextInt(this.nbQuartiersDansMain());
+        Quartier retour = main.get(numeroHasard);
+        main.remove(numeroHasard);
+        return retour;
     }
 
-    // Méthode pour réinitialiser le joueur
-    public void reinitialiser() {
-        main.clear();
-        for (int i = 0; i < cite.length; i++) {
-            cite[i] = null;
-        }
-        pieces = 0;
-        possedeCouronne = false;
-    }
-    public void setPersonnage(Personnage personnageChoisi) {
-        // Ici, vous pouvez ajouter une logique pour vérifier si le personnage est déjà pris
-        // Mais pour l'instant, nous assignons simplement le personnage au joueur
-        this.personnage = personnageChoisi;
-
-        // Assurez-vous également de mettre à jour l'association dans l'objet Personnage
-        if (personnageChoisi != null) {
-            personnageChoisi.setJoueur(this);
-        }
-    }
-
-    // Méthode pour obtenir le personnage du joueur
-    public Personnage getPersonnage() {
-        return personnage;
+    public void reinitialiser() { //Reinitialiser les données du joueur
+        this.tresor = 0;
+        this.main = new ArrayList < Quartier > ();
+        this.cite = new Quartier[8];
+        this.nbQuartiers = 0;
     }
 }
+
 

@@ -29,6 +29,12 @@ public class Joueur {
     public Personnage getPersonnage() { //Retourne le personnage choisi par le joueur
         return this.monPersonnage;
     }
+    public void setNom(String nom) {
+        if (nom == null || nom.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom ne peut pas être vide ou null.");
+        }
+        this.nom = nom;
+    }
 
     public String getNom() { //Retourne le nom du joueur
         return this.nom;

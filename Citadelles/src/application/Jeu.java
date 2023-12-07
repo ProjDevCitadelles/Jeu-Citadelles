@@ -49,24 +49,29 @@ public class Jeu {
     }
 
     private void initialisation() {
-        //Initialisation du plateau de jeu
+        // Initialisation du plateau de jeu
         this.plateauDeJeu = Configuration.configurationDeBase(Configuration.nouvellePioche());
-        //On ajoute 2 pièces au trésor de tous les joueurs
+        // On ajoute 2 pièces au trésor de tous les joueurs
         for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
             Joueur joueur = this.plateauDeJeu.getJoueur(i);
             joueur.ajouterPieces(2);
-            //On ajoute 4 quartiers au trésor de tous les joueurs
+            // On ajoute 4 quartiers au trésor de tous les joueurs
             for (int j = 0; j < 4; j++) {
                 joueur.ajouterQuartierDansMain(this.plateauDeJeu.getPioche().piocher());
             }
-            //On attribut à chaque joueur s'il est simulé ou pas
-            if (joueur.getNom().contains("bot")) {
-                joueur.setSimule(true);
-            }
+            // On attribue à chaque joueur s'il est simulé ou pas
+            // Supposons que les 3 premiers joueurs sont des bots et le dernier est humain
+            joueur.setSimule(i < 3); // Les 3 premiers joueurs (indices 0, 1, 2) sont des bots
         }
-        //On attribut aléatoirement la couronne à un joueur
+        // Demander le nom du joueur humain
+        System.out.print("Entrez votre nom : ");
+        String nomJoueur = Interaction.lireUneChaine();
+        this.plateauDeJeu.getJoueur(3). setNom(nomJoueur);
+
+        // On attribut aléatoirement la couronne à un joueur
         this.plateauDeJeu.getJoueur(this.generateur.nextInt(this.plateauDeJeu.getNombreJoueurs())).setPossedeCouronne(true);
     }
+
 
     private void gestionCouronne() {
         //on détermine le joueur qui possède la couronne et on lui enlève la couronne

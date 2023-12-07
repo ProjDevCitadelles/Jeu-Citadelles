@@ -66,9 +66,9 @@ public class Configuration {
 
     //Déclaration des Joueurs
     private static Joueur j1 = new Joueur("Bob");
-    private static Joueur j2 = new Joueur("bot1");
-    private static Joueur j3 = new Joueur("bot2");
-    private static Joueur j4 = new Joueur("bot3");
+    private static Joueur j2 = new Joueur("Alice");
+    private static Joueur j3 = new Joueur("Patoche");
+    private static Joueur j4 = new Joueur("");
 
     public static Pioche nouvellePioche() {
         Pioche pioche = new Pioche();
@@ -143,5 +143,11 @@ public class Configuration {
         plateau.setPioche(pioche);
 
         return plateau;
+    }
+    public static void setNomJoueurHumain(String nom) {
+        if (nom == null || nom.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom du joueur ne peut pas être vide.");
+        }
+        j4.setNom(nom);
     }
 }

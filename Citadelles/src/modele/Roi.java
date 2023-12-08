@@ -27,6 +27,7 @@ public class Roi extends Personnage {
       System.out.println(message);
     }
     }
+    // POUR APRES QUAND CARACTERISTIQUES SERA LA
 	//public Roi(String unNom, char unRang, String lesCaracteristiques) {
 		//super(unNom, unRang, lesCaracteristiques);
 

@@ -44,7 +44,7 @@ public class Jeu {
             tourDeJeu();
             gestionCouronne();
             reinitialisationPersonnages();
-        } while (partieFinie() == false);
+        } while (!partieFinie());
         calculDesPoints();
     }
 

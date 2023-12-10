@@ -45,6 +45,9 @@ public class Condottiere extends Personnage {
 
             System.out.println("Quel joueur choisissez-vous ? (0 pour ne rien faire)");
             int listeJoueur = Interaction.lireUnEntier(0, (getPlateau().getNombreJoueurs() + 1));
+            if (listeJoueur == 0) {
+                return;
+            }
             Joueur joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
             boolean choixDuJoueur = false;
 

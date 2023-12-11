@@ -35,47 +35,47 @@ public class Jeu {
     }
 
     private void afficherLesRegles() {
-        System.out.println("Règles du jeu Citadelles :\n");
+        System.out.println("R\u00E8gles du jeu Citadelles :\n");
 
         System.out.println("Objectif du Jeu:");
-        System.out.println("Construire la cité la plus prestigieuse en accumulant des quartiers.");
-        System.out.println("La partie se termine lorsqu'un joueur construit son huitième quartier.");
+        System.out.println("Construire la cit\u00E9 la plus prestigieuse en accumulant des quartiers.");
+        System.out.println("La partie se termine lorsqu'un joueur construit son huiti\u00E8me quartier.");
         System.out.println("Le gagnant est celui avec le plus de points de victoire.\n");
 
         System.out.println("Composition du Jeu:");
-        System.out.println("- Cartes Quartier: Divers types avec des coûts et des points.");
-        System.out.println("- Cartes Personnage: Huit personnages, chacun avec des pouvoirs spéciaux.");
-        System.out.println("- Pièces d'or.");
+        System.out.println("- Cartes Quartier: Divers types avec des co\u00FBts et des points.");
+        System.out.println("- Cartes Personnage: Huit personnages, chacun avec des pouvoirs sp\u00E9ciaux.");
+        System.out.println("- Pi\u00E8ces d'or.");
         System.out.println("- Couronne: Indique le premier joueur.\n");
 
-        System.out.println("Déroulement d'une Partie:");
+        System.out.println("D\u00E9roulement d'une Partie:");
         System.out.println("1. Distribution des Personnages:");
         System.out.println("   - Choix de personnage en fonction de la couronne.");
-        System.out.println("   - Certaines cartes de personnages sont mises de côté.");
+        System.out.println("   - Certaines cartes de personnages sont mises de c\u00F4t\u00E9.");
 
         System.out.println("2. Tour de Jeu:");
         System.out.println("   - Les joueurs, dans l'ordre des personnages, effectuent leurs actions.");
-        System.out.println("   - Actions: Prendre des pièces OU piocher des cartes Quartier,");
+        System.out.println("   - Actions: Prendre des pi\u00E8ces OU piocher des cartes Quartier,");
         System.out.println("     utiliser le pouvoir du personnage, construire un quartier.");
 
         System.out.println("3. Pouvoirs des Personnages:");
         System.out.println("   - Chaque personnage a un pouvoir unique.");
 
         System.out.println("4. Construction des Quartiers:");
-        System.out.println("   - Dépense de pièces d'or pour construire des quartiers.");
+        System.out.println("   - D\u00E9penser de pi\u00E8ces d'or pour construire des quartiers.");
         System.out.println("   - Chaque quartier construit apporte des points de victoire.");
 
         System.out.println("5. Fin de la Partie et Calcul des Points:");
-        System.out.println("   - Fin de partie : quand un joueur construit son huitième quartier.");
+        System.out.println("   - Fin de partie : quand un joueur construit son huiti\u00E8me quartier.");
         System.out.println("   - Calcul des points : valeur des quartiers, ensembles complets,");
         System.out.println("     quartiers bonus, conditions spécifiques des cartes.\n");
 
-        System.out.println("Stratégie:");
+        System.out.println("Strat\u00E9gie:");
         System.out.println("- Choix judicieux des personnages et gestion des ressources.");
         System.out.println("- Anticiper les choix des autres joueurs.");
         System.out.println("- Utiliser les pouvoirs pour avancer et entraver les adversaires.\n");
 
-        System.out.println("Citadelles offre une profondeur stratégique dans chaque partie.\n");
+        System.out.println("Citadelles offre une profondeur strat\u00E9gique dans chaque partie.\n");
     }
 
 
@@ -123,7 +123,7 @@ public class Jeu {
         //on attribue la couronne au joueur qui possède le personage Roi
         for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
             if (this.plateauDeJeu.getJoueur(i).getPersonnage().getNom().equals("Roi")) {
-                System.out.println("\t\n" + this.plateauDeJeu.getJoueur(i).getNom() + " possède la couronne\n");
+                System.out.println("\t\n" + this.plateauDeJeu.getJoueur(i).getNom() + " poss\u00E8de la couronne\n");
                 this.plateauDeJeu.getJoueur(i).setPossedeCouronne(true);
             }
         }
@@ -141,7 +141,7 @@ public class Jeu {
         //on parcourt tous les joueurs pour vérifier si un possède une cité complète
         for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
             if (this.plateauDeJeu.getJoueur(i).nbQuartiersDansCite() >= 7) {
-                System.out.println("\t\nLa partie est terminé : " + this.plateauDeJeu.getJoueur(i).getNom() + " possède une cité complète\n");
+                System.out.println("\t\nLa partie est termin\u00E9 : " + this.plateauDeJeu.getJoueur(i).getNom() + " poss\u00E8de une cit\u00E9 compl\u00E8te\n");
                 //on affecte l'attribut isPremier de joueur à true pour dire qu'il est le premier à avoir une cité complète
                 this.plateauDeJeu.getJoueur(i).setPremier(true);
                 this.plateauDeJeu.getJoueur(joueurPersoRangMax).setRangPlusEleve();
@@ -165,7 +165,7 @@ public class Jeu {
                     for (int i = 0; i < this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbQuartiersDansMain(); i++) {
                         if (this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i) != null) {
                             System.out.println((i + 1) + " : " + this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getNom() + " - type : " +
-                                    this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getType() + " - pièces : " +
+                                    this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getType() + " - pi\u00E8ces : " +
                                     this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getCout());
                         }
                     }
@@ -179,15 +179,15 @@ public class Jeu {
                                 this.plateauDeJeu.getPersonnage(personnage).getJoueur().getCite()[i].getCout());
                     }
                 } else {
-                    System.out.println("\nVotre cité est vide !");
+                    System.out.println("\nVotre cit\u00E9 est vide !");
                 }
-                System.out.println("\tVous possédez " + this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbPieces() + " pièces\n");
+                System.out.println("\tVous poss\u00E9dez " + this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbPieces() + " pi\u00E8ces\n");
                 //on vérifie si le personnage n'est pas assassiné
                 if (!this.plateauDeJeu.getPersonnage(personnage).getAssassine()) {
                     //on vérifie si le personnage n'est pas volé
                     if (this.plateauDeJeu.getPersonnage(personnage).getVole()) {
-                        System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " est volé !\n");
-                        System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " donne toutes ses pièces au voleur !\n");
+                        System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " est vol\u00E9 !\n");
+                        System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " donne toutes ses pi\u00E8ces au voleur !\n");
                         int nbPieces = this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbPieces();
                         //si le personnage est volé, il donne toutes ses pièces au voleur
                         this.plateauDeJeu.getPersonnage(personnage).getJoueur().retirerPieces(nbPieces);
@@ -262,10 +262,10 @@ public class Jeu {
                         }
                     }
                 } else {
-                    System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " est assassiné !\n");
+                    System.out.println("\tLe " + this.plateauDeJeu.getPersonnage(personnage).getNom() + " est assassin\u00E9 !\n");
                 }
             } else {
-                System.out.println("\tAucun joueur ne possède le " + this.plateauDeJeu.getPersonnage(personnage).getNom() + "\n");
+                System.out.println("\tAucun joueur ne poss\u00E8de le " + this.plateauDeJeu.getPersonnage(personnage).getNom() + "\n");
             }
         }
         joueurPersoRangMax = this.plateauDeJeu.getJoueur(0).getPersonnage().getRang();
@@ -290,7 +290,7 @@ public class Jeu {
             pFaceCachee = generateur.nextInt(this.plateauDeJeu.getNombrePersonnages());
         } while (pFaceVisible1 == pFaceVisible2 || pFaceVisible2 == pFaceCachee || pFaceVisible1 == pFaceCachee);
 
-        System.out.println("Les personnages " + this.plateauDeJeu.getPersonnage(pFaceVisible1).getNom() + " et " + this.plateauDeJeu.getPersonnage(pFaceVisible2).getNom() + " sont écartés face visible.");
+        System.out.println("Les personnages " + this.plateauDeJeu.getPersonnage(pFaceVisible1).getNom() + " et " + this.plateauDeJeu.getPersonnage(pFaceVisible2).getNom() + " sont \u00E9cart\u00E9s face visible.");
         System.out.println("Un personnage est écarté face caché");
 
         Personnage[] listePerso = new Personnage[9];
@@ -313,7 +313,7 @@ public class Jeu {
 
             System.out.println(
                     "\n----------------------------------------------\n" +
-                            "\t\t  " + this.plateauDeJeu.getJoueur(currentPlayer).getNom() + " " + (this.plateauDeJeu.getJoueur(currentPlayer).getPossedeCouronne() == true ? "\n\t   (Joueur couronné)" : "") + "\n" +
+                            "\t\t  " + this.plateauDeJeu.getJoueur(currentPlayer).getNom() + " " + (this.plateauDeJeu.getJoueur(currentPlayer).getPossedeCouronne() == true ? "\n\t   (Joueur couronn\u00E9)" : "") + "\n" +
                             "     Quel personnage choisissez vous ?\n" +
                             "                                              \n"
             );
@@ -346,7 +346,7 @@ public class Jeu {
         } while (playerIteration <= this.plateauDeJeu.getNombreJoueurs() - 1);
 
         System.out.println(
-                "\n\tLe choix des Personnages est terminé.\n" +
+                "\n\tLe choix des Personnages est termin\u00E9.\n" +
                         "\tLe tour commence : \n" +
                         "----------------------------------------------\n"
         );

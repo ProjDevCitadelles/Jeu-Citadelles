@@ -1,6 +1,12 @@
 package application;
 import java.util.Scanner;
-
+/**
+ * @author Laaouane Adam
+ * @author Thizon Matéo
+ * @author Poultier Victor
+ * @author Reulier Titouan
+ * @version 12 dec. 2023
+ */
 public class Application {
 
     public static void main(String[] args) {

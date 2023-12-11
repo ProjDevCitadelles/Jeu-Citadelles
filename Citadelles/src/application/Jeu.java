@@ -291,7 +291,7 @@ public class Jeu {
         } while (pFaceVisible1 == pFaceVisible2 || pFaceVisible2 == pFaceCachee || pFaceVisible1 == pFaceCachee);
 
         System.out.println("Les personnages " + this.plateauDeJeu.getPersonnage(pFaceVisible1).getNom() + " et " + this.plateauDeJeu.getPersonnage(pFaceVisible2).getNom() + " sont \u00E9cart\u00E9s face visible.");
-        System.out.println("Un personnage est écarté face caché");
+        System.out.println("Un personnage est \u00E9cart\u00E9 face cach\u00E9");
 
         Personnage[] listePerso = new Personnage[9];
         for (int i = 0; i < this.plateauDeJeu.getNombrePersonnages(); i++) {
@@ -313,14 +313,14 @@ public class Jeu {
 
             System.out.println(
                     "\n----------------------------------------------\n" +
-                            "\t\t  " + this.plateauDeJeu.getJoueur(currentPlayer).getNom() + " " + (this.plateauDeJeu.getJoueur(currentPlayer).getPossedeCouronne() == true ? "\n\t   (Joueur couronn\u00E9)" : "") + "\n" +
+                            "\t\t  " + this.plateauDeJeu.getJoueur(currentPlayer).getNom() + " " + (this.plateauDeJeu.getJoueur(currentPlayer).getPossedeCouronne() ? "\n\t   (Joueur couronn\u00E9)" : "") + "\n" +
                             "     Quel personnage choisissez vous ?\n" +
                             "                                              \n"
             );
 
             System.out.print("Liste des personnages :\n");
             for (int i = 0; i < this.plateauDeJeu.getNombrePersonnages(); i++) {
-                if (listePerso[i] instanceof Personnage)
+                if (listePerso[i] != null)
                     System.out.println("\t" + i + " - " + this.plateauDeJeu.getPersonnage(i).getNom());
             }
 
@@ -333,10 +333,10 @@ public class Jeu {
                     choix = Interaction.lireUnEntier(0, this.plateauDeJeu.getNombrePersonnages());
 
 
-                if (!(listePerso[choix] instanceof Personnage))
+                if (listePerso[choix] == null)
                     System.out.println("\tImpossible de faire ce choix !");
 
-            } while (!(listePerso[choix] instanceof Personnage));
+            } while (listePerso[choix] == null);
 
             this.plateauDeJeu.getPersonnage(choix).setJoueur(this.plateauDeJeu.getJoueur(currentPlayer));
             listePerso[choix] = null;

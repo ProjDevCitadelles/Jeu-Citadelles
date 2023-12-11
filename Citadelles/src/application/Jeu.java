@@ -353,9 +353,9 @@ public class Jeu {
     }
 
     private void percevoirRessource(int personnage) {
-        System.out.println("\tVoulez vous percevoir des cartes ou des pièces d'or ?\t");
+        System.out.println("\tVoulez vous percevoir des cartes ou des pi\u00E8ces d'or ?\t");
         System.out.println("1 : deux cartes");
-        System.out.println("2 : deux pièces d'or");
+        System.out.println("2 : deux pi\u00E8ces d'or");
         int response = 0;
         if (!this.plateauDeJeu.getPersonnage(personnage).getJoueur().isSimule())
             response = Interaction.lireUnEntier(1, 3);

@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Application {
 
     public static void main(String[] args) {
-        // Le scanner devrait être fermé après son utilisation pour éviter les fuites de ressources
+// Le scanner devrait être fermé après son utilisation pour éviter les fuites de ressources
         try (Scanner scanner = new Scanner(System.in)) {
             Jeu jeu = new Jeu(); // Création d'une instance du jeu
             jeu.jouer();

@@ -64,25 +64,25 @@ public abstract class Personnage {
     }
 
     public void ajouterPieces() { //Ajouter 2 pièces au joueur auquel le personnage est associé
-        if (joueur != null && assassine == false) {
+        if (joueur != null && !assassine) {
             joueur.ajouterPieces(2);
         }
     }
 
     public void ajouterQuartier(Quartier nouveau) { //Ajouter un quartier dans la main du joueur associé au personnage
-        if (joueur != null && assassine == false) {
+        if (joueur != null && !assassine) {
             joueur.ajouterQuartierDansMain(nouveau);
         }
     }
 
     public void construire(Quartier nouveau) { //Construire un quartier dans la cité du joueur associé au personnage
-        if (joueur != null && assassine == false) {
+        if (joueur != null && !assassine) {
             joueur.ajouterQuartierDansCite(nouveau);
         }
     }
 
     public void percevoirRessourcesSpecifiques() { //Perception des ressources spécifiques du personnage
-        if (joueur != null && assassine == false) {
+        if (joueur != null && !assassine) {
             System.out.println("aucune ressource sp\u00E9cifique ");
         }
     }

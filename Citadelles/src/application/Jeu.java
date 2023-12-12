@@ -435,6 +435,9 @@ public class Jeu {
                 }
             }
         }
+        for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
+            System.out.println(this.plateauDeJeu.getJoueur(i).getNom() + " a un total de " + scores[i][0] + " points !");
+        }
         System.out.println("\t"+this.plateauDeJeu.getJoueur(joueurMax).getNom() + " a remport\u00E9 la partie avec un total de " + scoreMax + " points.\n");
         System.out.println("\tF\u00E9licitations " + this.plateauDeJeu.getJoueur(joueurMax).getNom() + "!!!\n");
     }

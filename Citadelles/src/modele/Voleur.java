@@ -24,19 +24,15 @@ public class Voleur extends Personnage {
 
             Personnage personnageChoisi = this.getPlateau().getPersonnage(listePerso - 1);
 
-            if (personnageChoisi.getJoueur().equals(null)) {
-                personnageVole = true;
-            } else if (personnageChoisi.getRang() == 1) {
+            if (personnageChoisi.getRang() == 1) {
                 System.out.println("Vous ne pouvez pas voler un personnage de rang 1");
-                personnageVole = false;
             } else if (personnageChoisi.getNom().equals("Voleur")) {
                 System.out.println("Vous ne pouvez pas vous voler vous même");
-                personnageVole = false;
             } else {
                 personnageChoisi.setVole();
                 personnageVole = true;
             }
-        } while (personnageVole == false);
+        } while (!personnageVole);
     }
 
     public void utiliserPouvoirAvatar() {
@@ -51,13 +47,7 @@ public class Voleur extends Personnage {
             personnageChoisi = this.getPlateau().getPersonnage(listeperso - 1);
         }
 
-        do {
-            if (personnageChoisi.getJoueur().equals(null)) {
-                personnageVole = true;
-            } else {
-                personnageChoisi.setVole();
-                personnageVole = true;
-            }
-        } while (personnageVole == false);
+        personnageChoisi.setVole();
+        personnageVole = true;
     }
 }

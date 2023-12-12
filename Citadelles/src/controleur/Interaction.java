@@ -65,6 +65,7 @@ public class Interaction {
 
     }
 
+    // renvoie une chaîne de caractère lue au clavier :
     public static String lireUneChaine() {
         String retour = "";
 

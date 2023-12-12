@@ -26,7 +26,7 @@ public class Condottiere extends Personnage {
         System.out.println("Voulez-vous utiliser votre pouvoir de destruction ? (o/n)");
         boolean utiliserPouvoir = Interaction.lireOuiOuNon();
 
-        if (utiliserPouvoir == true) {
+        if (utiliserPouvoir) {
             System.out.println("Voici la liste des joueurs et le contenu de leur cité :");
 
             for (int i = 0; i < this.getPlateau().getNombreJoueurs(); i++) {
@@ -35,7 +35,7 @@ public class Condottiere extends Personnage {
 
                 for (int j = 0; j < joueur.nbQuartiersDansCite(); j++) {
                     Quartier quartier = joueur.getCite()[j];
-                    if (quartier instanceof Quartier) {
+                    if (quartier != null) {
                         System.out.println((j + 1) + " " + quartier.getNom() + " (coût " + quartier.getCout() + "), ");
                     }
                 }
@@ -52,36 +52,32 @@ public class Condottiere extends Personnage {
             boolean choixDuJoueur = false;
 
             do {
-                if (listeJoueur == 0) {
-                    choixDuJoueur = false;
+                if (joueurChoisi.getPersonnage().getNom().equals("Eveque") && joueurChoisi.getPersonnage().getAssassine() == false) {
+                    System.out.println("Impossible de choisir un Eveque vivant");
                 } else {
-                    if (joueurChoisi.getPersonnage().getNom().equals("Eveque") && joueurChoisi.getPersonnage().getAssassine() == false) {
-                        System.out.println("Impossible de choisir un Eveque vivant");
-                    } else {
-                        choixDuJoueur = true;
+                    choixDuJoueur = true;
 
-                        boolean choixDuQuartier = false;
+                    boolean choixDuQuartier = false;
 
-                        do {
-                            System.out.println("Quel quartier choisissez-vous ? ");
-                            int listeQuartiers = Interaction.lireUnEntier(1, (joueurChoisi.nbQuartiersDansCite() + 1));
+                    do {
+                        System.out.println("Quel quartier choisissez-vous ? ");
+                        int listeQuartiers = Interaction.lireUnEntier(1, (joueurChoisi.nbQuartiersDansCite() + 1));
 
-                            Quartier quartierChoisi = joueurChoisi.getCite()[listeQuartiers - 1];
+                        Quartier quartierChoisi = joueurChoisi.getCite()[listeQuartiers - 1];
 
-                            if (this.getJoueur().nbPieces() < (quartierChoisi.getCout() - 1)) {
-                                System.out.println("Votre trésor n’est pas suffisant");
-                            } else {
-                                choixDuQuartier = true;
-                                System.out.println(joueurChoisi.nbQuartiersDansCite());
-                                joueurChoisi.retirerQuartierDansCite(quartierChoisi.getNom());
-                                System.out.println("Vous avez démoli " + quartierChoisi.getNom() + " de la cité de " + joueurChoisi.getNom());
-                            }
+                        if (this.getJoueur().nbPieces() < (quartierChoisi.getCout() - 1)) {
+                            System.out.println("Votre trésor n’est pas suffisant");
+                        } else {
+                            choixDuQuartier = true;
+                            System.out.println(joueurChoisi.nbQuartiersDansCite());
+                            joueurChoisi.retirerQuartierDansCite(quartierChoisi.getNom());
+                            System.out.println("Vous avez démoli " + quartierChoisi.getNom() + " de la cité de " + joueurChoisi.getNom());
+                        }
 
 
-                        } while (choixDuQuartier == false);
-                    }
+                    } while (!choixDuQuartier);
                 }
-            } while (choixDuJoueur == false);
+            } while (!choixDuJoueur);
         }
     }
 
@@ -89,28 +85,26 @@ public class Condottiere extends Personnage {
         Random rand = new Random();
         boolean choixDuJoueur = false;
 
-        do {
-            int listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
-            Joueur joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
+        int listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
+        Joueur joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
 
-            while (joueurChoisi.nbQuartiersDansCite() == 0 || ((joueurChoisi.getPersonnage().getNom().equals("Eveque") && joueurChoisi.getPersonnage().getAssassine() == false))) {
-                listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
-                joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
-            }
+        while (joueurChoisi.nbQuartiersDansCite() == 0 || ((joueurChoisi.getPersonnage().getNom().equals("Eveque") && joueurChoisi.getPersonnage().getAssassine() == false))) {
+            listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
+            joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
+        }
 
-            int listeQuartiers = rand.nextInt(joueurChoisi.nbQuartiersDansCite());
-            Quartier quartierChoisi = joueurChoisi.getCite()[listeQuartiers];
+        int listeQuartiers = rand.nextInt(joueurChoisi.nbQuartiersDansCite());
+        Quartier quartierChoisi = joueurChoisi.getCite()[listeQuartiers];
 
-            while (this.getJoueur().nbPieces() < (quartierChoisi.getCout() - 1)) {
-                listeQuartiers = rand.nextInt(joueurChoisi.nbQuartiersDansCite());
-                quartierChoisi = joueurChoisi.getCite()[listeQuartiers];
-            }
+        while (this.getJoueur().nbPieces() < (quartierChoisi.getCout() - 1)) {
+            listeQuartiers = rand.nextInt(joueurChoisi.nbQuartiersDansCite());
+            quartierChoisi = joueurChoisi.getCite()[listeQuartiers];
+        }
 
-            joueurChoisi.retirerQuartierDansCite(quartierChoisi.getNom());
-            System.out.println("La condottiere a démoli " + quartierChoisi.getNom() + " de la cité de " + joueurChoisi.getNom());
-            choixDuJoueur = true;
+        joueurChoisi.retirerQuartierDansCite(quartierChoisi.getNom());
+        System.out.println("La condottiere a démoli " + quartierChoisi.getNom() + " de la cité de " + joueurChoisi.getNom());
+        choixDuJoueur = true;
 
-        } while (!choixDuJoueur);
     }
 
 }

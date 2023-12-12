@@ -22,7 +22,7 @@ public class Magicienne extends Personnage {
                             this.getPlateau().getJoueur(i).nbQuartiersDansMain() + " cartes dans sa main");
                 }
             }
-            System.out.println("Veuillez choisir un joueur en entrant son num�ro ");
+            System.out.println("Veuillez choisir un joueur en entrant son num\u00E8ro ");
             int joueur = Interaction.lireUnEntier(1, this.getPlateau().getNombreJoueurs() + 1);
             copieMainMagicienne = new ArrayList < Quartier > (this.getJoueur().getMain());
             copieMainJoueur = new ArrayList < Quartier > (

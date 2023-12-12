@@ -48,19 +48,19 @@ public class Assassin extends Personnage {
     public static void main(String[] args) {
         PlateauDeJeu plateau = new PlateauDeJeu();
 
-        Joueur j1 = new Joueur("Hugo");
+        Joueur j1 = new Joueur("bot Bob");
         Roi roi = new Roi();
         roi.setJoueur(j1);
         plateau.ajouterJoueur(j1);
         plateau.ajouterPersonnage(roi);
 
-        Joueur j2 = new Joueur("Nathan");
+        Joueur j2 = new Joueur("bot Alice ");
         Assassin assassin = new Assassin();
         assassin.setJoueur(j2);
         plateau.ajouterJoueur(j2);
         plateau.ajouterPersonnage(assassin);
 
-        Joueur j3 = new Joueur("Steph");
+        Joueur j3 = new Joueur("bot Patoche");
         Eveque eveque = new Eveque();
         eveque.setJoueur(j3);
         plateau.ajouterJoueur(j3);

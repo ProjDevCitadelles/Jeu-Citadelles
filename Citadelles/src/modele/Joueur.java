@@ -31,7 +31,7 @@ public class Joueur {
     }
     public void setNom(String nom) {
         if (nom == null || nom.trim().isEmpty()) {
-            throw new IllegalArgumentException("Le nom ne peut pas être vide ou null.");
+            throw new IllegalArgumentException("Le nom ne peut pas \u00EAtre vide ou null.");
         }
         this.nom = nom;
     }
@@ -96,7 +96,7 @@ public class Joueur {
         if (piece > 0) {
             tresor = tresor + piece;
         } else {
-            System.out.println("Le nombre de pieces ne peut pas être négatif");
+            System.out.println("Le nombre de pieces ne peut pas \u00EAtre n\u00E9gatif");
         }
     }
 
@@ -105,10 +105,10 @@ public class Joueur {
             if (piece > 0) {
                 tresor = tresor - piece;
             } else {
-                System.out.println("Le nombre de pieces ne peut pas être négatif");
+                System.out.println("Le nombre de pieces ne peut pas \u00EAtre n\u00E9gatif");
             }
         } else {
-            System.out.println("Vous ne pouvez pas retirer plus de pièces que le trésor");
+            System.out.println("Vous ne pouvez pas retirer plus de pi\u00E8ces que le tr\u00E9sor");
         }
     }
 

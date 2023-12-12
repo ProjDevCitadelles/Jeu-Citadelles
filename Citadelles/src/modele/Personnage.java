@@ -83,7 +83,7 @@ public abstract class Personnage {
 
     public void percevoirRessourcesSpecifiques() { //Perception des ressources spécifiques du personnage
         if (joueur != null && assassine == false) {
-            System.out.println("aucune ressource spécifique ");
+            System.out.println("aucune ressource sp\u00E9cifique ");
         }
     }
 

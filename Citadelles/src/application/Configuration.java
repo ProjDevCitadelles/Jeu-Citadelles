@@ -65,8 +65,8 @@ public class Configuration {
     private static final Personnage voleur = new Voleur();
 
     //Déclaration des Joueurs
-    private static final Joueur j1 = new Joueur(" bot Bob");
-    private static final Joueur j2 = new Joueur(" bot Alice");
+    private static final Joueur j1 = new Joueur("bot Bob");
+    private static final Joueur j2 = new Joueur("bot Alice");
     private static final Joueur j3 = new Joueur("bot Patoche");
     private static final Joueur j4 = new Joueur("");
 

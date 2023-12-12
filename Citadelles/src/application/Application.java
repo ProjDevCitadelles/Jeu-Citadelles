@@ -1,59 +1,64 @@
 package application;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Application {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> createAndShowGUI());
+        SwingUtilities.invokeLater(Application::createAndShowGUI);
     }
 
     private static void createAndShowGUI() {
-        JFrame frame = new JFrame("CitadElles");
+        JFrame frame = new JFrame("Citadelles");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null); // Centre la fenêtre
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajoute une marge autour du panel
 
-        JLabel welcomeLabel = new JLabel("Bienvenue dans CitadElles");
+        JLabel welcomeLabel = new JLabel("Bienvenue dans Citadelles", SwingConstants.CENTER);
+        welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Change la police et la taille
         panel.add(welcomeLabel);
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Ajoute de l'espace entre les composants
 
-        JButton playButton = new JButton("Jouer une nouvelle partie");
-        JButton rulesButton = new JButton("Afficher les règles du jeu");
-        JButton quitButton = new JButton("Quitter l'application");
+        JButton playButton = createButton("Jouer une nouvelle partie");
+        JButton rulesButton = createButton("Afficher les r\u00E8gles du jeu");
+        JButton quitButton = createButton("Quitter l'application");
 
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nomJoueur = JOptionPane.showInputDialog(frame, "Entrez votre nom :");
-                Configuration.setNomJoueurHumain(nomJoueur);
-                Jeu jeu = new Jeu();
-                jeu.jouer();
-            }
+        playButton.addActionListener(e -> {
+            String nomJoueur = JOptionPane.showInputDialog(frame, "Entrez votre nom :");
+            Configuration.setNomJoueurHumain(nomJoueur);
+            Jeu jeu = new Jeu();
+            jeu.jouer();
         });
 
-        rulesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
+        rulesButton.addActionListener(e -> {
+            Jeu jeu = new Jeu();
+            jeu.afficherLesRegles();
         });
 
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        quitButton.addActionListener(e -> System.exit(0));
 
         panel.add(playButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Ajoute de l'espace entre les boutons
         panel.add(rulesButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Ajoute de l'espace entre les boutons
         panel.add(quitButton);
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    private static JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setFont(new Font("Arial", Font.PLAIN, 16)); // Change la police et la taille
+        button.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getMinimumSize().height));
+        return button;
     }
 }

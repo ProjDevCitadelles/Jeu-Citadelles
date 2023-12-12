@@ -1,42 +1,44 @@
 package application;
 
 import java.util.ArrayList;
+//import java.util.List;
 import java.util.Random;
 import controleur.Interaction;
-import modele.Joueur;
-import modele.Personnage;
-import modele.PlateauDeJeu;
-import modele.Quartier;
+import modele.*;
+import vue.*;
 
 import javax.swing.*;
 
 public class Jeu {
-
+    //private List<JeuObservateur> observateurs = new ArrayList<>();
+    private CitadellesUI ui;
     private int joueurPersoRangMax = 0;
     private PlateauDeJeu plateauDeJeu;
-    private Random generateur;
+    private final Random generateur;
 
     public Jeu() {
         this.plateauDeJeu = new PlateauDeJeu();
         this.generateur = new Random();
+        this.ui = ui;
     }
 
-    public void jouer() {
-        int choix = 0;
-        afficherBienvenue();
-        do {
-            afficherMenu();
-            choix = Interaction.lireUnEntier(1, 4);
-            if (choix == 1) {
-                jouerPartie();
-            } else if (choix == 2) {
-                afficherLesRegles();
-            }
-        } while (choix != 3);
-        quitterPartie();
+/*    public void ajouterObservateur(JeuObservateur observateur) {
+        observateurs.add(observateur);
     }
 
-    void afficherLesRegles() {
+    public void supprimerObservateur(JeuObservateur observateur) {
+        observateurs.remove(observateur);
+    }
+
+    protected void notifierObservateurs() {
+        for (JeuObservateur observateur : observateurs) {
+            observateur.jeuMisAJour();
+        }
+    }*/
+    public PlateauDeJeu getPlateauDeJeu() {
+        return plateauDeJeu;
+    }
+    public void afficherLesRegles() {
         JTextArea textArea = new JTextArea(15, 50);
         textArea.setText("Règles du jeu Citadelles :\n\n" +
                 "Objectif du Jeu:\n" +
@@ -80,8 +82,7 @@ public class Jeu {
         JOptionPane.showMessageDialog(null, scrollPane, "Règles du jeu Citadelles", JOptionPane.INFORMATION_MESSAGE);
     }
 
-
-    private void jouerPartie() {
+    public void jouerPartie() {
         initialisation();
         do {
             tourDeJeu();
@@ -91,7 +92,7 @@ public class Jeu {
         calculDesPoints();
     }
 
-    private void initialisation() {
+    public void initialisation() {
         // Initialisation du plateau de jeu
         this.plateauDeJeu = Configuration.configurationDeBase(Configuration.nouvellePioche());
         // On ajoute 2 pièces au trésor de tous les joueurs
@@ -104,13 +105,9 @@ public class Jeu {
             }
             joueur.setSimule(i < 3); // Les 3 premiers joueurs (indices 0, 1, 2) sont des bots
         }
-        // Demander le nom du joueur humain
-        System.out.print("Entrez votre nom : ");
-        String nomJoueur = Interaction.lireUneChaine();
-        this.plateauDeJeu.getJoueur(3). setNom(nomJoueur);
-
         // On attribue aléatoirement la couronne à un joueur
         this.plateauDeJeu.getJoueur(this.generateur.nextInt(this.plateauDeJeu.getNombreJoueurs())).setPossedeCouronne(true);
+        //notifierObservateurs();
     }
 
 
@@ -127,6 +124,9 @@ public class Jeu {
                 this.plateauDeJeu.getJoueur(i).setPossedeCouronne(true);
             }
         }
+/*
+        notifierObservateurs();
+*/
     }
 
     private void reinitialisationPersonnages() {
@@ -135,6 +135,8 @@ public class Jeu {
             if (this.plateauDeJeu.getPersonnage(i).getJoueur() != null)
                 this.plateauDeJeu.getPersonnage(i).reinitialiser();
         }
+        //notifierObservateurs();
+
     }
 
     private boolean partieFinie() {
@@ -149,9 +151,10 @@ public class Jeu {
             }
         }
         return false;
+
     }
 
-    private void tourDeJeu() {
+    public void tourDeJeu() {
         //on effectue le choix des personnages
         choixPersonnages();
         for (int personnage = 0; personnage < this.plateauDeJeu.getNombrePersonnages(); personnage++) {
@@ -161,8 +164,7 @@ public class Jeu {
                 //on vérifie si le joueur associé au personnage n'est pas simulé par l'ordinateur en testant son attribut simule de la classe joueur
                 if (!this.plateauDeJeu.getPersonnage(personnage).getJoueur().isSimule()) {
                     //on affiche la main du joueur
-                    System.out.println("\n\tVoici votre Main :\n");
-                    for (int i = 0; i < this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbQuartiersDansMain(); i++) {
+                    System.out.println("\n\tVoici votre Main :\n");                    for (int i = 0; i < this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbQuartiersDansMain(); i++) {
                         if (this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i) != null) {
                             System.out.println((i + 1) + " : " + this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getNom() + " - type : " +
                                     this.plateauDeJeu.getPersonnage(personnage).getJoueur().getMain().get(i).getType() + " - pi\u00E8ces : " +
@@ -275,6 +277,7 @@ public class Jeu {
                 joueurPersoRangMax = j;
         }
         System.out.println("\n\tFin du tour de jeu\n");
+        //notifierObservateurs();
     }
 
     private void choixPersonnages() {
@@ -350,6 +353,7 @@ public class Jeu {
                         "\tLe tour commence : \n" +
                         "----------------------------------------------\n"
         );
+      //  notifierObservateurs();
     }
 
     private void percevoirRessource(int personnage) {
@@ -397,9 +401,10 @@ public class Jeu {
             System.out.println("\tVous avez per\u00E7u deux pi\u00E8ces d'or\n");
             this.plateauDeJeu.getPersonnage(personnage).ajouterPieces();
         }
+        //notifierObservateurs();
     }
 
-    private void calculDesPoints() {
+    public void calculDesPoints() {
         int[][] scores = new int[this.plateauDeJeu.getNombreJoueurs()][1];
         int score = 0;
         for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
@@ -440,21 +445,8 @@ public class Jeu {
         }
         System.out.println("\t"+this.plateauDeJeu.getJoueur(joueurMax).getNom() + " a remport\u00E9 la partie avec un total de " + scoreMax + " points.\n");
         System.out.println("\tF\u00E9licitations " + this.plateauDeJeu.getJoueur(joueurMax).getNom() + "!!!\n");
+       // notifierObservateurs();
     }
 
-    private void afficherBienvenue() {
-        System.out.println("----------------------------------------------\n"+"\tBienvenue dans Citadelles\n"+"----------------------------------------------\n");
-    }
 
-    private void afficherMenu() {
-        System.out.println("Veuillez entrer le chiffre correspondant \u00E0 votre choix !");
-        System.out.println("	1 : 	Jouer une nouvelle partie. ");
-        System.out.println("	2 : 	Afficher les r\u00E8gles du jeu. ");
-        System.out.println("	3 : 	Quitter l'application. ");
-    }
-
-    private void quitterPartie() {
-        System.out.println("\t\u00C0 bient\u00F4t dans Citadelles !");
-        System.exit(0);
-    }
 }

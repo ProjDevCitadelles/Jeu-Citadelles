@@ -1,10 +1,17 @@
 package controleur;
 
+import application.Jeu;
+import vue.CitadellesUI;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Interaction {
     private static Scanner sc = new Scanner(System.in);
+
+    public Interaction(Jeu jeu, CitadellesUI citadellesUI) {
+
+    }
 
     public static int lireUnEntier() {
         int i = 0;

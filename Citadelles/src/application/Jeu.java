@@ -1,53 +1,40 @@
-
 package application;
 
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
+import controleur.Interaction;
 import modele.Joueur;
+import modele.Personnage;
 import modele.PlateauDeJeu;
 import modele.Quartier;
 
 public class Jeu {
 
-    private JFrame frame;
-    private JTextArea gameInfoArea;
-    private Random generateur;
+    private int joueurPersoRangMax = 0;
     private PlateauDeJeu plateauDeJeu;
+    private Random generateur;
 
     public Jeu() {
         this.plateauDeJeu = new PlateauDeJeu();
         this.generateur = new Random();
-        initializeGUI();
     }
 
-    private void initializeGUI() {
-        frame = new JFrame("Citadelles Jeu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-
-        gameInfoArea = new JTextArea();
-        gameInfoArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(gameInfoArea);
-        frame.add(scrollPane, BorderLayout.CENTER);
-
-        JButton playButton = new JButton("Jouer une nouvelle partie");
-        playButton.addActionListener(e -> jouerPartie());
-        JButton rulesButton = new JButton("Afficher les règles du jeu");
-        rulesButton.addActionListener(e -> afficherLesRegles());
-        JButton quitButton = new JButton("Quitter l'application");
-        quitButton.addActionListener(e -> quitterPartie());
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(playButton);
-        buttonPanel.add(rulesButton);
-        buttonPanel.add(quitButton);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
-        frame.setVisible(true);
+    public void jouer() {
+        int choix = 0;
+        afficherBienvenue();
+        do {
+            afficherMenu();
+            choix = Interaction.lireUnEntier(1, 4);
+            if (choix == 1) {
+                jouerPartie();
+            } else if (choix == 2) {
+                afficherLesRegles();
+            }
+        } while (choix != 3);
+        quitterPartie();
     }
 
-    private void afficherLesRegles() {
+    protected void afficherLesRegles() {
         System.out.println("R\u00E8gles du jeu Citadelles :\n");
 
         System.out.println("Objectif du Jeu:");
@@ -92,7 +79,7 @@ public class Jeu {
     }
 
 
-    private void jouerPartie() {
+    protected void jouerPartie() {
         initialisation();
         do {
             tourDeJeu();
@@ -464,10 +451,7 @@ public class Jeu {
     }
 
     private void quitterPartie() {
-        gameInfoArea.append("À bientôt dans Citadelles !\n");
+        System.out.println("\tÀ bientôt dans Citadelles !");
         System.exit(0);
     }
-
-    // Other methods for game logic
-    // ...
 }

@@ -3,7 +3,13 @@ package application;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * @author Laaouane Adam
+ * @author Thizon Matéo
+ * @author Poultier Victor
+ * @author Reulier Titouan
+ * @version 12 dec. 2023
+ */
 public class Application {
 
     public static void main(String[] args) {

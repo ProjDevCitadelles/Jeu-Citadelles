@@ -22,7 +22,7 @@ public class Assassin extends Personnage {
             int c = Interaction.lireUnEntier() - 1;
             System.out.println("Votre choix : " + c);
             if (listePersonnages[c].getNom().equals("Assassin")) {
-                System.out.println("Vous ne pouvez pas vous assasiner.");
+                System.out.println("Vous ne pouvez pas vous assassiner.");
             } else {
                 listePersonnages[c].setAssassine();
                 continu = false;

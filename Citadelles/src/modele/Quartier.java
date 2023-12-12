@@ -9,7 +9,7 @@ public class Quartier {
             "RELIGIEUX",
             "MILITAIRE",
             "NOBLE",
-            "COMMERÇANT",
+            "COMMERCANT",
             "MERVEILLE"
     };
 

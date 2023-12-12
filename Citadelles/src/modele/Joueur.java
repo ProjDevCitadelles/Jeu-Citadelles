@@ -96,7 +96,7 @@ public class Joueur {
         if (piece > 0) {
             tresor = tresor + piece;
         } else {
-            System.out.println("Le nombre de pieces ne peut pas être négatif");
+            System.out.println("Le nombre de pieces ne peut pas etre negatif");
         }
     }
 
@@ -105,7 +105,7 @@ public class Joueur {
             if (piece > 0) {
                 tresor = tresor - piece;
             } else {
-                System.out.println("Le nombre de pieces ne peut pas être négatif");
+                System.out.println("Le nombre de pieces ne peut pas etre negatif");
             }
         } else {
             System.out.println("Vous ne pouvez pas retirer plus de pièces que le trésor");
@@ -156,7 +156,7 @@ public class Joueur {
         return retour;
     }
 
-    public void reinitialiser() { //Réinitialiser les données du joueur
+    public void reinitialiser() { //Reinitialiser les données du joueur
         this.tresor = 0;
         this.main = new ArrayList < Quartier > ();
         this.cite = new Quartier[8];

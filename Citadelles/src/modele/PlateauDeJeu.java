@@ -31,7 +31,7 @@ public class PlateauDeJeu {
         this.pioche = pioche;
     }
 
-    public Personnage getPersonnage(int i) { //Retourne un personnage parmi la liste des personnages
+    public Personnage getPersonnage(int i) { //Retourne un personnage parmis la liste des personnages
         if (0 <= i && i <= 8) {
             return listePersonnages[i];
         } else {
@@ -39,7 +39,7 @@ public class PlateauDeJeu {
         }
     }
 
-    public Joueur getJoueur(int i) { //Retourne un personnage parmi la liste des joueurs
+    public Joueur getJoueur(int i) { //Retourne un personnage parmis la liste des joueurs
         if (0 <= i && i <= 8) {
             return listeJoueurs[i];
         } else {

@@ -110,7 +110,7 @@ public class Condottiere extends Personnage {
             System.out.println("La condottiere a démoli " + quartierChoisi.getNom() + " de la cité de " + joueurChoisi.getNom());
             choixDuJoueur = true;
 
-        } while (!choixDuJoueur);
+        } while (choixDuJoueur == false);
     }
 
 }

@@ -18,7 +18,7 @@ public class Pioche {
 		this.liste.add(quartier);
 	}
 
-	public int nombreElements() { //Retourne le nombre de cartes dans la pioche
+	public int nombreElements() { //Retourne le nombre de carte dans la pioche
 		return this.liste.size();
 	}
 

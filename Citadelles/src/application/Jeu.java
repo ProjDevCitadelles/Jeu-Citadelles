@@ -171,11 +171,11 @@ public class Jeu {
                     }
                 }
                 //on affiche la cité du joueur
-                System.out.println("\n\tVoici votre Cité :\n");
+                System.out.println("\n\tVoici votre Cit\u00E9 :\n");
                 if (this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbQuartiersDansCite() > 0) {
                     for (int i = 0; i < this.plateauDeJeu.getPersonnage(personnage).getJoueur().nbQuartiersDansCite(); i++) {
                         System.out.println((i + 1) + " : " + this.plateauDeJeu.getPersonnage(personnage).getJoueur().getCite()[i].getNom() + " - type : " +
-                                this.plateauDeJeu.getPersonnage(personnage).getJoueur().getCite()[i].getType() + " - pièces : " +
+                                this.plateauDeJeu.getPersonnage(personnage).getJoueur().getCite()[i].getType() + " - pi\u00E8ces : " +
                                 this.plateauDeJeu.getPersonnage(personnage).getJoueur().getCite()[i].getCout());
                     }
                 } else {
@@ -366,16 +366,16 @@ public class Jeu {
         }
         if (response == 1) {
 
-            System.out.println("\tVous avez pioché deux cartes\n");
+            System.out.println("\tVous avez pioch\u00E9 deux cartes\n");
 
             Quartier[] quartiers = new Quartier[2];
             for (int i = 0; i < quartiers.length; i++) {
                 quartiers[i] = this.plateauDeJeu.getPioche().piocher();
             }
-            System.out.println("\tVoici les cartes que vous avez pioché : ");
+            System.out.println("\tVoici les cartes que vous avez pioch\u00E9 : ");
             for (int i = 0; i < quartiers.length; i++) {
                 System.out.println((i + 1) + " : " + quartiers[i].getNom() + " - type : " +
-                        quartiers[i].getType() + " - pièces : " + quartiers[i].getCout());
+                        quartiers[i].getType() + " - pi\u00E8ces : " + quartiers[i].getCout());
             }
             System.out.println("\tQuelle carte voulez-vous garder ? : ");
             int carte = 0;
@@ -394,7 +394,7 @@ public class Jeu {
                 }
             }
         } else {
-            System.out.println("\tVous avez perçu deux pièces d'or\n");
+            System.out.println("\tVous avez per\u00E7u deux pi\u00E8ces d'or\n");
             this.plateauDeJeu.getPersonnage(personnage).ajouterPieces();
         }
     }
@@ -435,8 +435,11 @@ public class Jeu {
                 }
             }
         }
-        System.out.println("\t"+this.plateauDeJeu.getJoueur(joueurMax).getNom() + " a remporté la partie avec un total de " + scoreMax + " points.\n");
-        System.out.println("\tFélicitation " + this.plateauDeJeu.getJoueur(joueurMax).getNom() + "!!!\n");
+        for (int i = 0; i < this.plateauDeJeu.getNombreJoueurs(); i++) {
+            System.out.println(this.plateauDeJeu.getJoueur(i).getNom() + " a un total de " + scores[i][0] + " points !");
+        }
+        System.out.println("\t"+this.plateauDeJeu.getJoueur(joueurMax).getNom() + " a remport\u00E9 la partie avec un total de " + scoreMax + " points.\n");
+        System.out.println("\tF\u00E9licitations " + this.plateauDeJeu.getJoueur(joueurMax).getNom() + "!!!\n");
     }
 
     private void afficherBienvenue() {
@@ -444,14 +447,14 @@ public class Jeu {
     }
 
     private void afficherMenu() {
-        System.out.println("Veuillez entrer le chiffre correspondant à  votre choix !");
+        System.out.println("Veuillez entrer le chiffre correspondant \u00E0 votre choix !");
         System.out.println("	1 : 	Jouer une nouvelle partie. ");
         System.out.println("	2 : 	Afficher les r\u00E8gles du jeu. ");
         System.out.println("	3 : 	Quitter l'application. ");
     }
 
     private void quitterPartie() {
-        System.out.println("\tÀ bientôt dans Citadelles !");
+        System.out.println("\t\u00C0 bient\u00F4t dans Citadelles !");
         System.exit(0);
     }
 }

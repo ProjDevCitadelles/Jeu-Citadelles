@@ -22,7 +22,7 @@ public class Magicienne extends Personnage {
                             this.getPlateau().getJoueur(i).nbQuartiersDansMain() + " cartes dans sa main");
                 }
             }
-            System.out.println("Veuillez choisir un joueur en entrant son num�ro ");
+            System.out.println("Veuillez choisir un joueur en entrant son num\u00E8ro ");
             int joueur = Interaction.lireUnEntier(1, this.getPlateau().getNombreJoueurs() + 1);
             copieMainMagicienne = new ArrayList < Quartier > (this.getJoueur().getMain());
             copieMainJoueur = new ArrayList < Quartier > (
@@ -63,11 +63,11 @@ public class Magicienne extends Personnage {
                     for (int i = 0; i < copieMainMagicienne.size(); i++) {
                         System.out.println("Voici les cartes de votre main :");
                         System.out.println((i + 1) + " " + copieMainMagicienne.get(i).getNom() + " - type : " +
-                                copieMainMagicienne.get(i).getType() + " - pi�ces : " +
+                                copieMainMagicienne.get(i).getType() + " - pi\u00E8ces : " +
                                 copieMainMagicienne.get(i).getCout());
                     }
                     for (int i = 0; i < nb; i++) {
-                        System.out.println("Quel est le num�ro de la carte que vous voulez retirer ? ");
+                        System.out.println("Quel est le num\u00E8ro de la carte que vous voulez retirer ? ");
                         int carte = Interaction.lireUnEntier(1, copieMainMagicienne.size() + 1);
                         this.getPlateau().getPioche().ajouter(copieMainMagicienne.remove(carte - 1));
                     }
@@ -99,11 +99,11 @@ public class Magicienne extends Personnage {
         if (res) {
             for (int i = 0; i < this.getPlateau().getNombreJoueurs(); i++) {
                 if (!this.getPlateau().getJoueur(i).monPersonnage.getNom().equals(this.getNom())) {
-                    System.out.println((i + 1) + " : Le joueur " + this.getPlateau().getJoueur(i).getNom() + " poss�de " +
+                    System.out.println((i + 1) + " : Le joueur " + this.getPlateau().getJoueur(i).getNom() + " poss\u00E8de " +
                             this.getPlateau().getJoueur(i).nbQuartiersDansMain() + " cartes dans sa main");
                 }
             }
-            System.out.println("Veuillez choisir un joueur en entrant son num�ro ");
+            System.out.println("Veuillez choisir un joueur en entrant son num\u00E8ro ");
             do
                 response = random
                         .nextInt(this.getPlateau().getNombreJoueurs() + 1);

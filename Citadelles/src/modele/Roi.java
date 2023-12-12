@@ -19,7 +19,7 @@ public class Roi extends Personnage {
             }
 
             this.getJoueur().ajouterPieces(sumNoble);
-            System.out.println(sumNoble + " pièces ajoutés.");
+            System.out.println(sumNoble + " pi\u00E8ces ajout\u00E9s.");
         }
     }
 

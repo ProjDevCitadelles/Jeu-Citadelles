@@ -13,6 +13,8 @@ public class Joueur {
     private boolean simule;
     private boolean premier;
     private boolean rangPlusEleve;
+    private boolean estProtegeParEveque;
+
 
     public Joueur(String nom) { //Constructeur
         this.nom = nom;
@@ -161,6 +163,14 @@ public class Joueur {
         this.main = new ArrayList < Quartier > ();
         this.cite = new Quartier[8];
         this.nbQuartiers = 0;
+    }
+
+    public void setProtectionContreCondottiere(boolean estProtege) {
+        this.estProtegeParEveque = estProtege;
+    }
+
+    public boolean estProtegeParEveque() {
+        return this.estProtegeParEveque;
     }
 }
 

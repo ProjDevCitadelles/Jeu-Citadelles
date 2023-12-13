@@ -24,9 +24,10 @@ public class Condottiere extends Personnage {
 
     public void utiliserPouvoir() {
         System.out.println("Voulez-vous utiliser votre pouvoir de destruction ? (o/n)");
-        boolean utiliserPouvoir = Interaction.lireOuiOuNon();
 
-        if (utiliserPouvoir) {
+        if (joueur.estProtegeParEveque()) {
+            System.out.println("Impossible de détruire un quartier : le joueur est protégé par l'Évêque.");
+        } else {
             System.out.println("Voici la liste des joueurs et le contenu de leur cit\u00E9 :");
 
             for (int i = 0; i < this.getPlateau().getNombreJoueurs(); i++) {
@@ -83,14 +84,12 @@ public class Condottiere extends Personnage {
 
     public void utiliserPouvoirAvatar() {
         Random rand = new Random();
-        boolean choixDuJoueur = false;
+        int listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs());
+        Joueur joueurChoisi = getPlateau().getJoueur(listeJoueur);
 
-        int listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
-        Joueur joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
-
-        while (joueurChoisi.nbQuartiersDansCite() == 0 || ((joueurChoisi.getPersonnage().getNom().equals("Eveque") && joueurChoisi.getPersonnage().getAssassine() == false))) {
-            listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs() + 1);
-            joueurChoisi = getPlateau().getJoueur(listeJoueur - 1);
+        while (joueurChoisi.nbQuartiersDansCite() == 0 || (joueurChoisi.estProtegeParEveque() && !joueurChoisi.getPersonnage().getAssassine())) {
+            listeJoueur = rand.nextInt(this.getPlateau().getNombreJoueurs());
+            joueurChoisi = getPlateau().getJoueur(listeJoueur);
         }
 
         int listeQuartiers = rand.nextInt(joueurChoisi.nbQuartiersDansCite());
@@ -103,8 +102,7 @@ public class Condottiere extends Personnage {
 
         joueurChoisi.retirerQuartierDansCite(quartierChoisi.getNom());
         System.out.println("La condottiere a démoli " + quartierChoisi.getNom() + " de la cit\u00E9 de " + joueurChoisi.getNom());
-        choixDuJoueur = true;
-
     }
+
 
 }

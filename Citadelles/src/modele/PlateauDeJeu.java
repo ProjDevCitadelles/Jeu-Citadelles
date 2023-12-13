@@ -40,7 +40,7 @@ public class PlateauDeJeu {
     }
 
     public Joueur getJoueur(int i) { //Retourne un personnage parmi la liste des joueurs
-        if (0 <= i && i <= 8) {
+        if (0 <= i && i <= 4) {
             return listeJoueurs[i];
         } else {
             return null;

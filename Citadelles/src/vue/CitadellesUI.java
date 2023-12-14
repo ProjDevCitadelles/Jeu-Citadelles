@@ -24,7 +24,6 @@ public class CitadellesUI extends JFrame {
     private JButton takeActionButton;
 
     public CitadellesUI() {
-        createAndShowGUI();
         initializeMessageArea();
         setUpGameUpdateStream();
     }

@@ -60,7 +60,7 @@ public class SettingsPanel extends JPanel {
 
     private void saveSettings() {
         // Logique pour sauvegarder les paramètres
-        final JOptionPane optionPane = new JOptionPane("Paramètres sauvegardés", JOptionPane.INFORMATION_MESSAGE);
+        final JOptionPane optionPane = new JOptionPane("Param\u00E8tres sauvegard\u00E9s", JOptionPane.INFORMATION_MESSAGE);
         final JDialog dialog = optionPane.createDialog("Confirmation");
         // Crée un Timer pour fermer le dialogue après 5 secondes
         Timer timer = new Timer(5000, new ActionListener() {
@@ -78,7 +78,7 @@ public class SettingsPanel extends JPanel {
 
     private void cancelSettings() {
         // Logique pour annuler les modifications
-        final JOptionPane optionPane = new JOptionPane("Modifications annulées", JOptionPane.INFORMATION_MESSAGE);
+        final JOptionPane optionPane = new JOptionPane("Modifications annul\u00E9es", JOptionPane.INFORMATION_MESSAGE);
         final JDialog dialog = optionPane.createDialog("Confirmation");
 
         // Crée un Timer pour fermer le dialogue après 5 secondes

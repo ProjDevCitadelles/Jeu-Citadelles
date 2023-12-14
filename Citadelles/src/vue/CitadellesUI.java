@@ -24,6 +24,7 @@ public class CitadellesUI extends JFrame {
     private JButton takeActionButton;
 
     public CitadellesUI() {
+        createAndShowGUI();
         initializeMessageArea();
         setUpGameUpdateStream();
     }
@@ -160,16 +161,17 @@ public class CitadellesUI extends JFrame {
         gameBoardPanel.setLayout(new BorderLayout()); // Utiliser BorderLayout pour les images dans les coins
         gameBoardPanel.setPreferredSize(new Dimension(300, 600)); // Simuler la zone du plateau de jeu
 
+
         // Créer des panneaux d'angle
         JPanel topLeftPanel = new JPanel(new BorderLayout());
         JPanel topRightPanel = new JPanel(new BorderLayout());
         JPanel bottomLeftPanel = new JPanel(new BorderLayout());
         JPanel bottomRightPanel = new JPanel(new BorderLayout());
 
-        JLabel player1 = createPlayerLabel("src/img/p1.png", 60, 60);
-        JLabel player2 = createPlayerLabel("src/img/p2.png", 60, 60);
-        JLabel player3 = createPlayerLabel("src/img/p3.png", 60, 60);
-        JLabel player4 = createPlayerLabel("src/img/p4.png", 60, 60);
+        JLabel player1 = createPlayerLabel("src/img/p1.png", 90, 60);
+        JLabel player2 = createPlayerLabel("src/img/p2.png", 90, 60);
+        JLabel player3 = createPlayerLabel("src/img/p3.png", 90, 60);
+        JLabel player4 = createPlayerLabel("src/img/p4.png", 90, 60);
 
         // Ajouter les labels aux panneaux d'angle
         topLeftPanel.add(player1, BorderLayout.WEST);
